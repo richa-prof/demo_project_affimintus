@@ -1,0 +1,34 @@
+
+<h1 class="center">Payment Attempts</h1>
+<div class="well">
+<%= link_to "New Payment", new_payment_path, class: "btn btn-primary" %>
+</div>
+<% if !flash[:notice].blank? %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Amount</th>
+    <th>Succeeded?</th>
+    <th>Authorization Code</th>
+  </tr>
+  <% if @payments.size > 0 %>
+    <% @payments.each do |payment| %>
+      <tr>
+        <td><%= payment.first_name %></td>
+        <td><%= payment.last_name %></td>		
+        <td><%= number_to_currency payment.amount %></td>
+        <td><%= payment.success == true ? "Yes" : "No" %></td>
+        <td><%= payment.authorization_code %></td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="5">No payments have been attempted.</td>
+    </tr>
+  <% end %>
+</table>
