@@ -38,7 +38,6 @@ class Payment < ActiveRecord::Base
 
   def process(user)
     if valid_card
-      binding.pry
       transaction = ActiveMerchant::Billing::StripeGateway.new(:login => ENV["STRIPE_SECRET_KEY"])
       purchaseOptions = {:billing_address => {
 	    :name     => user.name,

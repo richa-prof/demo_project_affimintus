@@ -13,7 +13,6 @@ class PaymentsController < ApplicationController
   	@payment = Payment.new(payment_params)
     if @payment.save
       if @payment.process(current_user)
-        binding.pry
         redirect_to payments_path, notice: "The user has been successfully charged." and return
       end
     else
